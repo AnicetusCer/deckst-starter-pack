@@ -1,3 +1,6 @@
 # Keep repository tidy for manually-curated artifacts
 .DS_Store
 Thumbs.db
+
+# Local build outputs
+games/bulldog/build/

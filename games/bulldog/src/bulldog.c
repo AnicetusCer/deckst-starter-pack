@@ -21,7 +21,8 @@ enum {
     FIELD_W = 32,
     FIELD_H = 18,
     MAX_OBSTACLES = 6,
-    FPS = 20
+    FPS = 20,
+    START_LIVES = 3
 };
 
 typedef enum {
@@ -52,6 +53,8 @@ typedef struct {
     int level;
     int fox_x;
     int fox_y;
+    int bulldog_x;
+    int lives;
     int timer_ticks;
     int phase_ticks;
     int phase_limit;
@@ -197,6 +200,13 @@ static int watch_ticks_for_level(int level) {
     return 42 + level * 2;
 }
 
+static int bulldog_x_for_level(int level) {
+    static const int positions[10] = {
+        16, 11, 21, 7, 25, 14, 19, 5, 27, 16
+    };
+    return positions[(level - 1) % 10];
+}
+
 static void add_obstacle(Game *game, int y, int x, int dx, int min_x, int max_x) {
     Obstacle *obstacle;
     if (game->obstacle_count >= MAX_OBSTACLES) return;
@@ -215,10 +225,13 @@ static void set_message(Game *game, const char *message, int ticks) {
 }
 
 static void load_level(Game *game, int level) {
+    int lives = game->lives > 0 ? game->lives : START_LIVES;
     memset(game, 0, sizeof(*game));
     game->level = level;
     game->fox_x = FIELD_W / 2;
     game->fox_y = FIELD_H - 2;
+    game->bulldog_x = bulldog_x_for_level(level);
+    game->lives = lives;
     game->timer_ticks = (45 - level * 2) * FPS;
     game->phase = PHASE_BACK;
     game->phase_limit = safe_ticks_for_level(level);
@@ -230,7 +243,7 @@ static void load_level(Game *game, int level) {
     if (level >= 7) add_obstacle(game, 10, 14, 1, 8, FIELD_W - 6);
     if (level >= 9) add_obstacle(game, 6, 22, -1, 5, FIELD_W - 5);
 
-    set_message(game, "Reach Bulldog. Move only while his back is turned.", FPS * 3);
+    set_message(game, "Touch Bulldog. Move only while his back is turned.", FPS * 3);
 }
 
 static const char *phase_text(Phase phase) {
@@ -257,8 +270,8 @@ static void draw(const Game *game) {
     int seconds = (game->timer_ticks + FPS - 1) / FPS;
 
     backend_goto(0, 0);
-    printf("BULLDOG  Level %02d  Time %02d  %s          \n",
-           game->level, seconds, phase_text(game->phase));
+    printf("BULLDOG  Level %02d  Lives %d  Time %02d  %s          \n",
+           game->level, game->lives, seconds, phase_text(game->phase));
     printf("+");
     for (x = 0; x < FIELD_W; ++x) putchar('-');
     printf("+\n");
@@ -267,7 +280,7 @@ static void draw(const Game *game) {
         putchar('|');
         for (x = 0; x < FIELD_W; ++x) {
             char cell = ' ';
-            if (y == 0 && x == FIELD_W / 2) cell = bulldog_char(game->phase);
+            if (y == 0 && x == game->bulldog_x) cell = bulldog_char(game->phase);
             if (y == 1) cell = '=';
             if (obstacle_at(game, x, y)) cell = 'o';
             if (game->fox_x == x && game->fox_y == y) cell = 'F';
@@ -317,9 +330,18 @@ static void advance_obstacles(Game *game) {
     }
 }
 
-static void send_to_start(Game *game, const char *reason) {
+static void restart_after_miss(Game *game, const char *reason) {
+    int level = game->level;
+    int lives = game->lives - 1;
+    if (lives <= 0) {
+        load_level(game, level);
+        game->lives = START_LIVES;
+        set_message(game, "No lives left. Level restarted.", FPS * 2);
+        return;
+    }
     game->fox_x = FIELD_W / 2;
     game->fox_y = FIELD_H - 2;
+    game->lives = lives;
     game->timer_ticks -= FPS * 4;
     if (game->timer_ticks < 1) game->timer_ticks = 1;
     set_message(game, reason, FPS * 2);
@@ -348,12 +370,14 @@ static void apply_input(Game *game, Key key) {
     if (!moved) return;
 
     if (game->phase == PHASE_WATCH) {
-        send_to_start(game, "Caught moving while Bulldog watched.");
+        restart_after_miss(game, "Caught moving. Lost a life.");
         return;
     }
 
-    game->fox_x = clamp_int(next_x, 0, FIELD_W - 1);
-    game->fox_y = clamp_int(next_y, 1, FIELD_H - 1);
+    next_x = clamp_int(next_x, 0, FIELD_W - 1);
+    if (next_y < 1 && next_x != game->bulldog_x) next_y = 1;
+    game->fox_x = next_x;
+    game->fox_y = clamp_int(next_y, 0, FIELD_H - 1);
 }
 
 static int fox_hit_obstacle(const Game *game) {
@@ -367,10 +391,10 @@ static int tick_game(Game *game) {
     apply_input(game, key);
     advance_obstacles(game);
     if (fox_hit_obstacle(game)) {
-        send_to_start(game, "Bumped by a toy. Back to the start.");
+        restart_after_miss(game, "Bumped by a toy. Lost a life.");
     }
 
-    if (game->fox_y <= 1) {
+    if (game->fox_y == 0 && game->fox_x == game->bulldog_x) {
         if (game->level >= 10) {
             set_message(game, "You won all 10 Bulldog levels.", FPS * 5);
             draw(game);
@@ -383,8 +407,7 @@ static int tick_game(Game *game) {
 
     game->timer_ticks--;
     if (game->timer_ticks <= 0) {
-        load_level(game, game->level);
-        set_message(game, "Time up. Try again.", FPS * 2);
+        restart_after_miss(game, "Time up. Lost a life.");
     }
 
     if (game->message_ticks > 0) game->message_ticks--;

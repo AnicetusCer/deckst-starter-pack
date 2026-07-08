@@ -12,7 +12,9 @@ can be tested before sprite art and disk packaging are added.
 - Q or Escape: quit
 
 The fox may move while the bulldog's back is turned. Stop when the bulldog is
-watching. Reach the top before the timer runs out and avoid the moving toys.
+watching. Touch the bulldog before the timer runs out and avoid the moving toys.
+Getting caught, hit, or timed out costs one life. Lose all lives and the level
+restarts.
 
 ## Build On Fedora For Development
 

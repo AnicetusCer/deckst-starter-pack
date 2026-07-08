@@ -15,6 +15,7 @@ when the user opts in via the DeckST Starter Settings flow.
 - `LICENSE.md`
 - `ATTRIBUTION.md`
 - `LICENSES/`
+- `games/bulldog/DESIGN.md`
 - `assets/tos/`
   - `EmuTOS.rom`
 - `assets/floppies/`
@@ -49,6 +50,10 @@ Populate the files listed below under `assets/` before tagging a release:
 Game/floppy starter files should only be added after their source and
 redistribution license are recorded in `ATTRIBUTION.md` and
 `metadata/sources.json`.
+
+The planned original starter game is `Bulldog`, documented in
+`games/bulldog/DESIGN.md`. It is intended to become a cleanly redistributable
+single-player Atari ST game made specifically for DeckST.
 
 Keep hashes in sync using:
 

@@ -12,11 +12,15 @@ when the user opts in via the DeckST Starter Settings flow.
 
 ## Layout
 
+- `LICENSE.md`
+- `ATTRIBUTION.md`
+- `LICENSES/`
 - `assets/tos/`
   - `EmuTOS.rom`
 - `assets/floppies/`
   - `Ballerburg.st`
 - `checksums/sha256.json`
+- `metadata/sources.json`
 - `tools/generate-checksum-index.py`
 - `metadata/release-notes.md`
 
@@ -71,6 +75,12 @@ python3 tools/verify-starter-pack.py \
 
 ## Attribution policy
 
-This repository tracks public-safe sources and licenses used for all bundled files.
-The authoritative metadata is currently maintained in
-`deckst/public/starter-bundle/manifest.json`.
+This repository carries its own license and attribution records:
+
+- `LICENSE.md` explains the aggregate repository license policy.
+- `ATTRIBUTION.md` credits each upstream project and source location.
+- `metadata/sources.json` provides machine-readable source and license metadata.
+- `LICENSES/` contains bundled license texts required by included assets.
+
+The main `deckst` repository also tracks matching launcher-facing metadata in
+`public/starter-bundle/manifest.json`.

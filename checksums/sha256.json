@@ -1,0 +1,17 @@
+{
+  "generated_utc": "2026-07-08",
+  "items": [
+    {
+      "id": "emutos",
+      "path": "assets/tos/EmuTOS.rom",
+      "sha256": "REPLACE_WITH_HASH",
+      "bytes": 0
+    },
+    {
+      "id": "ballerburg",
+      "path": "assets/floppies/Ballerburg.st",
+      "sha256": "REPLACE_WITH_HASH",
+      "bytes": 0
+    }
+  ]
+}

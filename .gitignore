@@ -1,0 +1,3 @@
+# Keep repository tidy for manually-curated artifacts
+.DS_Store
+Thumbs.db

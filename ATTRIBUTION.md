@@ -16,17 +16,6 @@ If this repository ships an EmuTOS binary, release notes should identify the
 exact upstream release file and checksum used. Keep corresponding source access
 available through the upstream project link above.
 
-## Ballerburg
-
-- File: `assets/floppies/Ballerburg.st`
-- Project: Ballerburg
-- Source: https://www.eckhardkruse.net/atari_st/baller.html?en=
-- License: Public Domain
-- Credit: Ballerburg authorship credited by historical community releases
-
-The original author page states that Ballerburg was published as public-domain
-software. Keep this attribution with any redistributed starter-pack release.
-
 ## Release Rule
 
 Before tagging a starter-pack release:

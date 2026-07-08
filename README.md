@@ -18,7 +18,7 @@ when the user opts in via the DeckST Starter Settings flow.
 - `assets/tos/`
   - `EmuTOS.rom`
 - `assets/floppies/`
-  - `Ballerburg.st`
+  - optional free games after license review
 - `checksums/sha256.json`
 - `metadata/sources.json`
 - `tools/generate-checksum-index.py`
@@ -45,7 +45,10 @@ DeckST will install from `public/starter-bundle/manifest.json` in the main
 Populate the files listed below under `assets/` before tagging a release:
 
 - `assets/tos/EmuTOS.rom`
-- `assets/floppies/Ballerburg.st`
+
+Game/floppy starter files should only be added after their source and
+redistribution license are recorded in `ATTRIBUTION.md` and
+`metadata/sources.json`.
 
 Keep hashes in sync using:
 

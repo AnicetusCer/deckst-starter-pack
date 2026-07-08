@@ -11,17 +11,6 @@
       "license_file": "LICENSES/GPL-2.0-only.txt",
       "credit": "EmuTOS Team, community-maintained open-source replacement TOS",
       "notes": "Record exact release filename and checksum before publishing binaries."
-    },
-    {
-      "id": "ballerburg",
-      "title": "Ballerburg",
-      "path": "assets/floppies/Ballerburg.st",
-      "upstream": "Ballerburg",
-      "source_url": "https://www.eckhardkruse.net/atari_st/baller.html?en=",
-      "license": "Public Domain",
-      "license_file": null,
-      "credit": "Ballerburg authorship credited by historical community releases",
-      "notes": "Original author page states the game was published as public-domain software."
     }
   ]
 }

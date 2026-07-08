@@ -49,6 +49,26 @@ Keep hashes in sync using:
 python3 tools/generate-checksum-index.py assets checksums/sha256.json
 ```
 
+Validate a release package before tagging:
+
+```bash
+python3 tools/verify-starter-pack.py
+```
+
+For stricter verification (fail if there are extra files under `assets/`):
+
+```bash
+python3 tools/verify-starter-pack.py --strict
+```
+
+If you use custom paths:
+
+```bash
+python3 tools/verify-starter-pack.py \
+  --assets-root /path/to/assets \
+  --checksums /path/to/checksums/sha256.json
+```
+
 ## Attribution policy
 
 This repository tracks public-safe sources and licenses used for all bundled files.

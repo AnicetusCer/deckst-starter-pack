@@ -24,6 +24,8 @@ def build(root: pathlib.Path, output: pathlib.Path) -> None:
     for relative in sorted(assets_root.rglob("*")):
         if not relative.is_file():
             continue
+        if relative.name == ".keep":
+            continue
         path = relative.as_posix().replace("\\", "/")
         entries.append(
             {

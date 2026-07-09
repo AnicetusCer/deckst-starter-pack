@@ -2,10 +2,22 @@
   "generated_utc": "2026-07-09",
   "items": [
     {
+      "id": "firmware",
+      "path": "assets/config/firmware.json",
+      "sha256": "aaebf996d97c869132671f34f73053aebe782013271ed718b4dd11fe5bd3ef01",
+      "bytes": 280
+    },
+    {
       "id": "Bulldog",
       "path": "assets/floppies/Bulldog.st",
       "sha256": "d33f19a057b34844661e608e1a664965a75b7b52f6e22396a164ea0b211dd9ea",
       "bytes": 737280
+    },
+    {
+      "id": "bulldog.game",
+      "path": "assets/profiles/bulldog.game.json",
+      "sha256": "e12c715215f172352e2d024d96ddcba47021a758352ccfe39a7574e3a17467fb",
+      "bytes": 1390
     },
     {
       "id": "EmuTOS",

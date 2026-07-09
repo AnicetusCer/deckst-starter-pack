@@ -20,6 +20,10 @@ when the user opts in via the DeckST Starter Settings flow.
   - `EmuTOS.rom`
 - `assets/floppies/`
   - `Bulldog.st`
+- `assets/profiles/`
+  - `bulldog.game.json`
+- `assets/config/`
+  - `firmware.json`
 - `checksums/sha256.json`
 - `metadata/sources.json`
 - `tools/generate-checksum-index.py`
@@ -47,6 +51,8 @@ Populate the files listed below under `assets/` before tagging a release:
 
 - `assets/tos/EmuTOS.rom`
 - `assets/floppies/Bulldog.st`
+- `assets/profiles/bulldog.game.json`
+- `assets/config/firmware.json`
 
 The planned original starter game is `Bulldog`, documented in
 `games/bulldog/DESIGN.md`. It is intended to become a cleanly redistributable

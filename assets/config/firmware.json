@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "firmware": [
+    {
+      "id": "tos-140-uk-emutos",
+      "sha256": "f3177763bd3f2a984bf7d2f112f4a3bb4a6d20c7e2d77549f6973bb884edb49e",
+      "path": "$DECKST_HOME/tos/emutos/EmuTOS.rom",
+      "version": "EmuTOS 1.4",
+      "region": "uk"
+    }
+  ]
+}

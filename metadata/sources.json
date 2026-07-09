@@ -28,6 +28,34 @@
       "license_file": "games/bulldog/LICENSE.md",
       "credit": "Original DeckST starter game by AnicetusCer and DeckST contributors",
       "notes": "Floppy image built from games/bulldog/build/BULLDOG.PRG using mtools."
+    },
+    {
+      "id": "bulldog-profile",
+      "title": "Bulldog DeckST profile",
+      "path": "assets/profiles/bulldog.game.json",
+      "upstream": "DeckST Starter Pack",
+      "source_url": "games/bulldog/",
+      "release_url": "https://github.com/AnicetusCer/deckst-starter-pack",
+      "source_archive": null,
+      "version": "0.2.0-dev",
+      "license": "MIT",
+      "license_file": "games/bulldog/LICENSE.md",
+      "credit": "Original DeckST starter profile for Bulldog",
+      "notes": "Installs into the user's DeckST profiles directory."
+    },
+    {
+      "id": "emutos-firmware-catalog",
+      "title": "EmuTOS DeckST firmware catalog",
+      "path": "assets/config/firmware.json",
+      "upstream": "DeckST Starter Pack",
+      "source_url": "metadata/sources.json",
+      "release_url": "https://github.com/AnicetusCer/deckst-starter-pack",
+      "source_archive": null,
+      "version": "0.3.0",
+      "license": "MIT",
+      "license_file": "LICENSE.md",
+      "credit": "DeckST starter-pack metadata",
+      "notes": "Installs into the user's DeckST config directory as firmware.json."
     }
   ]
 }

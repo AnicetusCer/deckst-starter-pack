@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "id": "bulldog",
+  "title": "Bulldog",
+  "metadata": {
+    "description": "An original DeckST starter game. Sneak a little fox across the field while Bulldog's back is turned, avoid moving toys, and reach the watchdog before time runs out.",
+    "release_year": 2026,
+    "developer": "DeckST contributors",
+    "publisher": "DeckST",
+    "genres": ["Arcade", "Puzzle", "Starter"]
+  },
+  "media": {
+    "floppies": [
+      {
+        "sha256": "d33f19a057b34844661e608e1a664965a75b7b52f6e22396a164ea0b211dd9ea",
+        "label": "Bulldog",
+        "filename_hint": "Bulldog.st"
+      }
+    ],
+    "boot_floppy": 0
+  },
+  "firmware": {
+    "tos": {
+      "preferred": "tos-140-uk-emutos",
+      "compatible": []
+    }
+  },
+  "machine": {
+    "model": "st",
+    "memory_mb": 1,
+    "monitor": "rgb",
+    "fast_floppy": true,
+    "write_protect_floppies": true
+  },
+  "display": {
+    "borders": true,
+    "aspect_correction": true,
+    "zoom": 2,
+    "force_max": false
+  },
+  "input": {
+    "bindings": [
+      {
+        "source": "gamepad.dpad",
+        "target": "st.joystick1.direction"
+      },
+      {
+        "source": "gamepad.a",
+        "target": "st.joystick1.fire",
+        "id": "dash",
+        "label": "Dash / Restart",
+        "show_in_overlay": true
+      }
+    ]
+  },
+  "notes": "Public starter profile for the original Bulldog Atari ST floppy."
+}

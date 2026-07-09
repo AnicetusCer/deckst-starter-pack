@@ -16,6 +16,26 @@ If this repository ships an EmuTOS binary, release notes should identify the
 exact upstream release file and checksum used. Keep corresponding source access
 available through the upstream project link above.
 
+Current starter-pack build:
+
+- Version: 1.4
+- Release: https://sourceforge.net/projects/emutos/files/emutos/1.4/
+- Binary source: `emutos-512k-1.4.zip`, file `etos512uk.img`
+- Matching source archive: `sources/emutos/emutos-src-1.4.tar.gz`
+
+## Bulldog
+
+- File: `assets/floppies/Bulldog.st`
+- Project: Bulldog
+- Source: `games/bulldog/`
+- License: MIT
+- Local license copy: `games/bulldog/LICENSE.md`
+- Credit: Original DeckST starter game by AnicetusCer and DeckST contributors
+
+Bulldog is original starter-pack content. The floppy image is built from the
+source in this repository and is intended to be redistributed with DeckST's
+public starter pack.
+
 ## Release Rule
 
 Before tagging a starter-pack release:

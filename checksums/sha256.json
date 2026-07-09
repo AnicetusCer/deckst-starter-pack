@@ -1,11 +1,17 @@
 {
-  "generated_utc": "2026-07-08",
+  "generated_utc": "2026-07-09",
   "items": [
     {
-      "id": "emutos",
+      "id": "Bulldog",
+      "path": "assets/floppies/Bulldog.st",
+      "sha256": "d33f19a057b34844661e608e1a664965a75b7b52f6e22396a164ea0b211dd9ea",
+      "bytes": 737280
+    },
+    {
+      "id": "EmuTOS",
       "path": "assets/tos/EmuTOS.rom",
-      "sha256": "REPLACE_WITH_HASH",
-      "bytes": 0
+      "sha256": "f3177763bd3f2a984bf7d2f112f4a3bb4a6d20c7e2d77549f6973bb884edb49e",
+      "bytes": 524288
     }
   ]
 }

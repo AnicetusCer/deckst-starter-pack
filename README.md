@@ -19,7 +19,7 @@ when the user opts in via the DeckST Starter Settings flow.
 - `assets/tos/`
   - `EmuTOS.rom`
 - `assets/floppies/`
-  - optional free games after license review
+  - `Bulldog.st`
 - `checksums/sha256.json`
 - `metadata/sources.json`
 - `tools/generate-checksum-index.py`
@@ -46,10 +46,7 @@ DeckST will install from `public/starter-bundle/manifest.json` in the main
 Populate the files listed below under `assets/` before tagging a release:
 
 - `assets/tos/EmuTOS.rom`
-
-Game/floppy starter files should only be added after their source and
-redistribution license are recorded in `ATTRIBUTION.md` and
-`metadata/sources.json`.
+- `assets/floppies/Bulldog.st`
 
 The planned original starter game is `Bulldog`, documented in
 `games/bulldog/DESIGN.md`. It is intended to become a cleanly redistributable

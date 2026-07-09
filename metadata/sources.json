@@ -1,5 +1,5 @@
 {
-  "reviewed_utc": "2026-07-08",
+  "reviewed_utc": "2026-07-09",
   "items": [
     {
       "id": "emutos",
@@ -7,10 +7,27 @@
       "path": "assets/tos/EmuTOS.rom",
       "upstream": "EmuTOS",
       "source_url": "https://emutos.sourceforge.io/",
+      "release_url": "https://sourceforge.net/projects/emutos/files/emutos/1.4/",
+      "source_archive": "sources/emutos/emutos-src-1.4.tar.gz",
+      "version": "1.4",
       "license": "GPL-2.0-only",
       "license_file": "LICENSES/GPL-2.0-only.txt",
       "credit": "EmuTOS Team, community-maintained open-source replacement TOS",
-      "notes": "Record exact release filename and checksum before publishing binaries."
+      "notes": "UK 512 KiB ROM extracted from emutos-512k-1.4.zip as etos512uk.img."
+    },
+    {
+      "id": "bulldog",
+      "title": "Bulldog",
+      "path": "assets/floppies/Bulldog.st",
+      "upstream": "DeckST Starter Pack",
+      "source_url": "games/bulldog/",
+      "release_url": "https://github.com/AnicetusCer/deckst-starter-pack",
+      "source_archive": null,
+      "version": "0.2.0-dev",
+      "license": "MIT",
+      "license_file": "games/bulldog/LICENSE.md",
+      "credit": "Original DeckST starter game by AnicetusCer and DeckST contributors",
+      "notes": "Floppy image built from games/bulldog/build/BULLDOG.PRG using mtools."
     }
   ]
 }

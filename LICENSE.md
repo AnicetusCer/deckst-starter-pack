@@ -41,6 +41,7 @@ for the authoritative per-item source and license records.
 Known starter assets:
 
 - EmuTOS: GPL-2.0-only. See [LICENSES/GPL-2.0-only.txt](LICENSES/GPL-2.0-only.txt).
+- Bulldog: MIT. See [games/bulldog/LICENSE.md](games/bulldog/LICENSE.md).
 
 This repository should not contain proprietary Atari TOS images, commercial game
 images, saves, save states, or files without clear redistribution permission.

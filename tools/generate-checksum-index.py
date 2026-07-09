@@ -18,15 +18,14 @@ def sha256_for_file(path: pathlib.Path) -> str:
     return digest.hexdigest()
 
 
-def build(root: pathlib.Path, output: pathlib.Path) -> None:
+def build(assets_root: pathlib.Path, output: pathlib.Path) -> None:
     entries = []
-    assets_root = root / "assets"
     for relative in sorted(assets_root.rglob("*")):
         if not relative.is_file():
             continue
         if relative.name == ".keep":
             continue
-        path = relative.as_posix().replace("\\", "/")
+        path = (pathlib.Path("assets") / relative.relative_to(assets_root)).as_posix()
         entries.append(
             {
                 "id": relative.stem,

@@ -56,7 +56,9 @@ The intended output is:
 build/Bulldog.st
 ```
 
-This step uses `mformat` and `mcopy` from `mtools`.
+This step uses `mformat`, `mmd`, and `mcopy` from `mtools`. The image puts
+`BULLDOG.PRG` in `A:\AUTO\` so EmuTOS starts the game automatically when the
+floppy boots.
 
 ## Test With EmuTOS And Hatari
 

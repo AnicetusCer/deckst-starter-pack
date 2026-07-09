@@ -12,7 +12,7 @@
   "media": {
     "floppies": [
       {
-        "sha256": "d33f19a057b34844661e608e1a664965a75b7b52f6e22396a164ea0b211dd9ea",
+        "sha256": "c2db2011bec3d31fc47e9a278ec20d6049281c449a133969c8aec522d5286e1a",
         "label": "Bulldog",
         "filename_hint": "Bulldog.st"
       }

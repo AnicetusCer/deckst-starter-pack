@@ -10,13 +10,13 @@
     {
       "id": "Bulldog",
       "path": "assets/floppies/Bulldog.st",
-      "sha256": "d33f19a057b34844661e608e1a664965a75b7b52f6e22396a164ea0b211dd9ea",
+      "sha256": "c2db2011bec3d31fc47e9a278ec20d6049281c449a133969c8aec522d5286e1a",
       "bytes": 737280
     },
     {
       "id": "bulldog.game",
       "path": "assets/profiles/bulldog.game.json",
-      "sha256": "e12c715215f172352e2d024d96ddcba47021a758352ccfe39a7574e3a17467fb",
+      "sha256": "414011e3196a921cf42d25bab196139576cf487d202b5a49002cf60a1d9e8712",
       "bytes": 1390
     },
     {

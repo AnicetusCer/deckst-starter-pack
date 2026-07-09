@@ -27,7 +27,8 @@ $(BUILD_DIR)/BULLDOG.PRG: $(SRC) | $(BUILD_DIR)
 $(FLOPPY_IMAGE): $(BUILD_DIR)/BULLDOG.PRG | $(BUILD_DIR)
 	dd if=/dev/zero of=$@ bs=1024 count=720
 	mformat -i $@ -f 720 ::
-	mcopy -i $@ $(BUILD_DIR)/BULLDOG.PRG ::BULLDOG.PRG
+	mmd -i $@ ::AUTO
+	mcopy -i $@ $(BUILD_DIR)/BULLDOG.PRG ::AUTO/BULLDOG.PRG
 
 clean:
 	rm -rf $(BUILD_DIR)

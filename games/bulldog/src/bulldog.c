@@ -42,6 +42,12 @@ typedef enum {
 } Phase;
 
 typedef enum {
+    MODE_PLAY = 0,
+    MODE_GAME_OVER,
+    MODE_WIN
+} Mode;
+
+typedef enum {
     STYLE_RESET = 0,
     STYLE_HEADER,
     STYLE_BORDER,
@@ -64,6 +70,7 @@ typedef struct {
 } Obstacle;
 
 typedef struct {
+    Mode mode;
     int level;
     int fox_x;
     int fox_y;
@@ -262,6 +269,7 @@ static void set_message(Game *game, const char *message, int ticks) {
 static void load_level(Game *game, int level) {
     int lives = game->lives > 0 ? game->lives : START_LIVES;
     memset(game, 0, sizeof(*game));
+    game->mode = MODE_PLAY;
     game->level = level;
     game->fox_x = FIELD_W / 2;
     game->fox_y = FIELD_H - 2;
@@ -324,6 +332,44 @@ static char field_tile(int x, int y) {
     return ' ';
 }
 
+static void draw_lives(int lives) {
+    int i;
+    for (i = 0; i < START_LIVES; ++i) {
+        putchar(i < lives ? '*' : '.');
+    }
+}
+
+static void draw_hud_line(const Game *game, int row, int seconds) {
+    backend_style(STYLE_MESSAGE);
+    if (row == 0) {
+        printf("  LEVEL %02d", game->level);
+    } else if (row == 2) {
+        printf("  LIVES ");
+        draw_lives(game->lives);
+    } else if (row == 4) {
+        printf("  TIME  %02d", seconds);
+    } else if (row == 6) {
+        printf("  DOG");
+    } else if (row == 7) {
+        printf("  %-11s", phase_text(game->phase));
+    } else if (row == 10) {
+        printf("  TARGET");
+    } else if (row == 11) {
+        printf("  column %02d", game->bulldog_x + 1);
+    } else if (row == 14 && game->mode == MODE_GAME_OVER) {
+        backend_style(STYLE_BULLDOG_WATCH);
+        printf("  GAME OVER");
+    } else if (row == 14 && game->mode == MODE_WIN) {
+        backend_style(STYLE_FOX);
+        printf("  YOU WIN");
+    } else if (row == 15 && game->mode != MODE_PLAY) {
+        printf("  Space restart");
+    } else if (row == 16 && game->mode != MODE_PLAY) {
+        printf("  Q quit");
+    }
+    backend_style(STYLE_RESET);
+}
+
 static void draw(const Game *game) {
     int x;
     int y;
@@ -331,8 +377,7 @@ static void draw(const Game *game) {
 
     backend_goto(0, 0);
     backend_style(STYLE_HEADER);
-    printf(" BULLDOG  LEVEL %02d  LIVES %d  TIME %02d  %-11s ",
-           game->level, game->lives, seconds, phase_text(game->phase));
+    printf(" BULLDOG  FOX VS THE WATCHFUL DOG                         ");
     backend_style(STYLE_RESET);
     printf("        \n");
     backend_style(STYLE_BORDER);
@@ -362,6 +407,7 @@ static void draw(const Game *game) {
             }
         }
         draw_cell('|', STYLE_BORDER);
+        draw_hud_line(game, y, seconds);
         printf("\n");
     }
 
@@ -372,8 +418,13 @@ static void draw(const Game *game) {
     backend_style(STYLE_RESET);
     printf("\n");
     backend_style(STYLE_MESSAGE);
-    printf("Arrows/WASD move  Space dash  Q quit                         \n");
-    printf("%-68s", game->message_ticks > 0 ? game->message : "");
+    if (game->mode == MODE_PLAY) {
+        printf("Arrows/WASD move  Space dash  Q quit                         \n");
+        printf("%-68s", game->message_ticks > 0 ? game->message : "");
+    } else {
+        printf("Space restart  Q quit                                         \n");
+        printf("%-68s", game->message_ticks > 0 ? game->message : "");
+    }
     backend_style(STYLE_RESET);
     printf("\n");
     fflush(stdout);
@@ -413,12 +464,12 @@ static void advance_obstacles(Game *game) {
 }
 
 static void restart_after_miss(Game *game, const char *reason) {
-    int level = game->level;
     int lives = game->lives - 1;
     if (lives <= 0) {
-        load_level(game, level);
-        game->lives = START_LIVES;
-        set_message(game, "No lives left. Level restarted.", FPS * 2);
+        game->mode = MODE_GAME_OVER;
+        game->lives = 0;
+        game->timer_ticks = 0;
+        set_message(game, "Game over. Press Space to restart.", FPS * 999);
         return;
     }
     game->fox_x = FIELD_W / 2;
@@ -470,6 +521,14 @@ static int tick_game(Game *game) {
     Key key = backend_read_key();
     if (key == KEY_QUIT) return 0;
 
+    if (game->mode != MODE_PLAY) {
+        if (key == KEY_FIRE) {
+            game->lives = START_LIVES;
+            load_level(game, 1);
+        }
+        return 1;
+    }
+
     apply_input(game, key);
     advance_obstacles(game);
     if (fox_hit_obstacle(game)) {
@@ -478,10 +537,9 @@ static int tick_game(Game *game) {
 
     if (game->fox_y == 0 && game->fox_x == game->bulldog_x) {
         if (game->level >= 10) {
-            set_message(game, "You won all 10 Bulldog levels.", FPS * 5);
-            draw(game);
-            backend_sleep_frame();
-            return 0;
+            game->mode = MODE_WIN;
+            set_message(game, "You won all 10 Bulldog levels. Press Space.", FPS * 999);
+            return 1;
         }
         load_level(game, game->level + 1);
         set_message(game, "Level clear.", FPS * 2);

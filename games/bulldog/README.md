@@ -15,7 +15,10 @@ stay testable before bitmap sprite art and disk packaging are added.
 The fox may move while the bulldog's back is turned. Stop when the bulldog is
 watching. Touch the bulldog before the timer runs out and avoid the moving toys.
 Getting caught, hit, or timed out costs one life. Lose all lives and the level
-restarts.
+shows a game-over screen. Press Space to restart.
+
+The right-side HUD shows the level, lives, timer, bulldog state, and target
+column.
 
 ## Build On Fedora For Development
 

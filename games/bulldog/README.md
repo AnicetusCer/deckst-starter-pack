@@ -41,6 +41,42 @@ The intended output is:
 build/BULLDOG.PRG
 ```
 
+## Package A Floppy Image
+
+After `BULLDOG.PRG` exists, package it into a 720 KiB Atari-compatible floppy
+image with:
+
+```bash
+make floppy
+```
+
+The intended output is:
+
+```text
+build/Bulldog.st
+```
+
+This step uses `mformat` and `mcopy` from `mtools`.
+
+## Test With EmuTOS And Hatari
+
+Once Hatari and EmuTOS are available:
+
+```bash
+hatari --tos /path/to/EmuTOS.rom --disk-a build/Bulldog.st
+```
+
+With the Hatari Flatpak:
+
+```bash
+flatpak run --command=hatari org.tuxfamily.hatari \
+  --tos /path/to/EmuTOS.rom \
+  --disk-a build/Bulldog.st
+```
+
+DeckST will eventually use the same model: EmuTOS as the TOS ROM and
+`Bulldog.st` as the game floppy.
+
 ## License
 
 The Bulldog source and documentation in this folder are licensed under the MIT

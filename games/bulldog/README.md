@@ -2,8 +2,9 @@
 
 `Bulldog` is an original single-player Atari ST starter game for DeckST.
 
-This first playable uses a simple terminal-style display so the gameplay loop
-can be tested before sprite art and disk packaging are added.
+This first playable uses colored terminal-style graphics on the host build and
+plain ASCII-compatible drawing for the Atari path. That lets the gameplay loop
+stay testable before bitmap sprite art and disk packaging are added.
 
 ## Controls
 

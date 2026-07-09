@@ -41,6 +41,20 @@ typedef enum {
     PHASE_WATCH
 } Phase;
 
+typedef enum {
+    STYLE_RESET = 0,
+    STYLE_HEADER,
+    STYLE_BORDER,
+    STYLE_FIELD,
+    STYLE_FINISH,
+    STYLE_FOX,
+    STYLE_BULLDOG_SAFE,
+    STYLE_BULLDOG_WARN,
+    STYLE_BULLDOG_WATCH,
+    STYLE_OBSTACLE,
+    STYLE_MESSAGE
+} Style;
+
 typedef struct {
     int y;
     int x;
@@ -118,6 +132,27 @@ static void backend_goto(int row, int col) {
     putchar((char)(col + 32));
 #else
     printf("\033[%d;%dH", row + 1, col + 1);
+#endif
+}
+
+static void backend_style(Style style) {
+#if BULLDOG_ATARI
+    (void)style;
+#else
+    static const char *codes[] = {
+        "\033[0m",
+        "\033[1;37;44m",
+        "\033[1;32m",
+        "\033[0;32m",
+        "\033[1;36m",
+        "\033[1;33m",
+        "\033[1;34m",
+        "\033[1;33;41m",
+        "\033[1;37;41m",
+        "\033[1;35m",
+        "\033[1;37m"
+    };
+    printf("%s", codes[(int)style]);
 #endif
 }
 
@@ -253,15 +288,40 @@ static const char *phase_text(Phase phase) {
 }
 
 static char bulldog_char(Phase phase) {
-    return phase == PHASE_WATCH ? 'D' : 'B';
+    if (phase == PHASE_WATCH) return 'D';
+    if (phase == PHASE_WARN) return '!';
+    return 'B';
+}
+
+static Style bulldog_style(Phase phase) {
+    if (phase == PHASE_WATCH) return STYLE_BULLDOG_WATCH;
+    if (phase == PHASE_WARN) return STYLE_BULLDOG_WARN;
+    return STYLE_BULLDOG_SAFE;
+}
+
+static int obstacle_index_at(const Game *game, int x, int y) {
+    int i;
+    for (i = 0; i < game->obstacle_count; ++i) {
+        if (game->obstacles[i].x == x && game->obstacles[i].y == y) return i;
+    }
+    return -1;
 }
 
 static int obstacle_at(const Game *game, int x, int y) {
-    int i;
-    for (i = 0; i < game->obstacle_count; ++i) {
-        if (game->obstacles[i].x == x && game->obstacles[i].y == y) return 1;
-    }
-    return 0;
+    return obstacle_index_at(game, x, y) >= 0;
+}
+
+static void draw_cell(char cell, Style style) {
+    backend_style(style);
+    putchar(cell);
+    backend_style(STYLE_RESET);
+}
+
+static char field_tile(int x, int y) {
+    if (y == 1) return '=';
+    if ((x + y) % 7 == 0) return ',';
+    if ((x * 3 + y) % 11 == 0) return '.';
+    return ' ';
 }
 
 static void draw(const Game *game) {
@@ -270,30 +330,52 @@ static void draw(const Game *game) {
     int seconds = (game->timer_ticks + FPS - 1) / FPS;
 
     backend_goto(0, 0);
-    printf("BULLDOG  Level %02d  Lives %d  Time %02d  %s          \n",
+    backend_style(STYLE_HEADER);
+    printf(" BULLDOG  LEVEL %02d  LIVES %d  TIME %02d  %-11s ",
            game->level, game->lives, seconds, phase_text(game->phase));
+    backend_style(STYLE_RESET);
+    printf("        \n");
+    backend_style(STYLE_BORDER);
     printf("+");
     for (x = 0; x < FIELD_W; ++x) putchar('-');
-    printf("+\n");
+    printf("+");
+    backend_style(STYLE_RESET);
+    printf("\n");
 
     for (y = 0; y < FIELD_H; ++y) {
-        putchar('|');
+        draw_cell('|', STYLE_BORDER);
         for (x = 0; x < FIELD_W; ++x) {
-            char cell = ' ';
-            if (y == 0 && x == game->bulldog_x) cell = bulldog_char(game->phase);
-            if (y == 1) cell = '=';
-            if (obstacle_at(game, x, y)) cell = 'o';
-            if (game->fox_x == x && game->fox_y == y) cell = 'F';
-            putchar(cell);
+            int obstacle_index = obstacle_index_at(game, x, y);
+            if (y == 0 && x == game->bulldog_x) {
+                draw_cell(bulldog_char(game->phase), bulldog_style(game->phase));
+            } else if (game->fox_x == x && game->fox_y == y) {
+                draw_cell('F', STYLE_FOX);
+            } else if (obstacle_index >= 0) {
+                static const char obstacle_chars[] = {'o', '@', '*', 'O'};
+                draw_cell(obstacle_chars[obstacle_index % 4], STYLE_OBSTACLE);
+            } else if (y == 0) {
+                draw_cell('^', STYLE_FINISH);
+            } else if (y == 1) {
+                draw_cell('=', STYLE_FINISH);
+            } else {
+                draw_cell(field_tile(x, y), STYLE_FIELD);
+            }
         }
-        printf("|\n");
+        draw_cell('|', STYLE_BORDER);
+        printf("\n");
     }
 
+    backend_style(STYLE_BORDER);
     printf("+");
     for (x = 0; x < FIELD_W; ++x) putchar('-');
-    printf("+\n");
+    printf("+");
+    backend_style(STYLE_RESET);
+    printf("\n");
+    backend_style(STYLE_MESSAGE);
     printf("Arrows/WASD move  Space dash  Q quit                         \n");
-    printf("%-68s\n", game->message_ticks > 0 ? game->message : "");
+    printf("%-68s", game->message_ticks > 0 ? game->message : "");
+    backend_style(STYLE_RESET);
+    printf("\n");
     fflush(stdout);
 }
 

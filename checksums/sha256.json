@@ -4,7 +4,7 @@
     {
       "id": "BulldogsFood",
       "path": "assets/artwork/BulldogsFood.bmp",
-      "sha256": "20f831285d81c0fbdf1835d8cf098a342c75fff76457daf8c9d5d7ea301976e5",
+      "sha256": "b786f9fbc524f31c449eb6a3a50730f56532cd04764c8846bce8090a6ccce195",
       "bytes": 1792854
     },
     {
@@ -22,7 +22,7 @@
     {
       "id": "bulldog.game",
       "path": "assets/profiles/bulldog.game.json",
-      "sha256": "552b60788f505e79c7d3394aa1cfa6f19132d8926ce2c54dffe15cde098d94c6",
+      "sha256": "467393808d0cfb6bcce9a56033b9afc96fccc7f367ef5fe4e2f44dcb7d4a1ecd",
       "bytes": 2112
     },
     {

@@ -1,19 +1,31 @@
 {
   "schema_version": 2,
   "id": "bulldog",
-  "title": "Bulldog",
+  "title": "Bulldog's Food",
   "metadata": {
-    "description": "An original DeckST starter game. Sneak a little fox across the field while Bulldog's back is turned, avoid moving toys, and reach the watchdog before time runs out.",
+    "description": "Sneak a hungry fox across the street while Bulldog's back is turned, dodge the neighbourhood hazards, and steal his food before time runs out.",
     "release_year": 2026,
-    "developer": "DeckST contributors",
-    "publisher": "DeckST",
-    "genres": ["Arcade", "Puzzle", "Starter"]
+    "developer": "AnicetusCer and DeckST contributors",
+    "publisher": "AnicetusCer",
+    "genres": [
+      "Arcade",
+      "Puzzle",
+      "Starter"
+    ],
+    "artwork": [
+      {
+        "role": "cover",
+        "sha256": "20f831285d81c0fbdf1835d8cf098a342c75fff76457daf8c9d5d7ea301976e5",
+        "filename_hint": "BulldogsFood.bmp",
+        "rights": "Original project artwork, distributed under the MIT License"
+      }
+    ]
   },
   "media": {
     "floppies": [
       {
-        "sha256": "c2db2011bec3d31fc47e9a278ec20d6049281c449a133969c8aec522d5286e1a",
-        "label": "Bulldog",
+        "sha256": "050aa301ce84b07f9b68b6e9ebba6d51ad2630a54d5fb8153c337049d02d8dd3",
+        "label": "Bulldog's Food",
         "filename_hint": "Bulldog.st"
       }
     ],
@@ -41,17 +53,36 @@
   "input": {
     "bindings": [
       {
-        "source": "gamepad.dpad",
-        "target": "st.joystick1.direction"
+        "source": "gamepad.dpad.up",
+        "target": "st.key.w"
+      },
+      {
+        "source": "gamepad.dpad.down",
+        "target": "st.key.s"
+      },
+      {
+        "source": "gamepad.dpad.left",
+        "target": "st.key.a"
+      },
+      {
+        "source": "gamepad.dpad.right",
+        "target": "st.key.d"
       },
       {
         "source": "gamepad.a",
-        "target": "st.joystick1.fire",
+        "target": "st.key.space",
         "id": "dash",
         "label": "Dash / Restart",
+        "show_in_overlay": true
+      },
+      {
+        "source": "gamepad.y",
+        "target": "st.key.f1",
+        "id": "help",
+        "label": "How to play",
         "show_in_overlay": true
       }
     ]
   },
-  "notes": "Public starter profile for the original Bulldog Atari ST floppy."
+  "notes": "Public DeckST profile for the original Bulldog's Food Atari ST game."
 }

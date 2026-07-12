@@ -1,6 +1,12 @@
 {
-  "generated_utc": "2026-07-09",
+  "generated_utc": "2026-07-12",
   "items": [
+    {
+      "id": "BulldogsFood",
+      "path": "assets/artwork/BulldogsFood.bmp",
+      "sha256": "20f831285d81c0fbdf1835d8cf098a342c75fff76457daf8c9d5d7ea301976e5",
+      "bytes": 1792854
+    },
     {
       "id": "firmware",
       "path": "assets/config/firmware.json",
@@ -10,14 +16,14 @@
     {
       "id": "Bulldog",
       "path": "assets/floppies/Bulldog.st",
-      "sha256": "c2db2011bec3d31fc47e9a278ec20d6049281c449a133969c8aec522d5286e1a",
+      "sha256": "050aa301ce84b07f9b68b6e9ebba6d51ad2630a54d5fb8153c337049d02d8dd3",
       "bytes": 737280
     },
     {
       "id": "bulldog.game",
       "path": "assets/profiles/bulldog.game.json",
-      "sha256": "414011e3196a921cf42d25bab196139576cf487d202b5a49002cf60a1d9e8712",
-      "bytes": 1390
+      "sha256": "552b60788f505e79c7d3394aa1cfa6f19132d8926ce2c54dffe15cde098d94c6",
+      "bytes": 2112
     },
     {
       "id": "EmuTOS",

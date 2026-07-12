@@ -15,11 +15,12 @@ when the user opts in via the DeckST Starter Settings flow.
 - `LICENSE.md`
 - `ATTRIBUTION.md`
 - `LICENSES/`
-- `games/bulldog/DESIGN.md`
 - `assets/tos/`
   - `EmuTOS.rom`
 - `assets/floppies/`
   - `Bulldog.st`
+- `assets/artwork/`
+  - `BulldogsFood.bmp`
 - `assets/profiles/`
   - `bulldog.game.json`
 - `assets/config/`
@@ -27,6 +28,7 @@ when the user opts in via the DeckST Starter Settings flow.
 - `checksums/sha256.json`
 - `metadata/sources.json`
 - `tools/generate-checksum-index.py`
+- `tools/import-bulldogs-food-release.sh`
 - `metadata/release-notes.md`
 
 ## Quick setup (user side)
@@ -51,12 +53,20 @@ Populate the files listed below under `assets/` before tagging a release:
 
 - `assets/tos/EmuTOS.rom`
 - `assets/floppies/Bulldog.st`
+- `assets/artwork/BulldogsFood.bmp`
 - `assets/profiles/bulldog.game.json`
 - `assets/config/firmware.json`
 
-The planned original starter game is `Bulldog`, documented in
-`games/bulldog/DESIGN.md`. It is intended to become a cleanly redistributable
-single-player Atari ST game made specifically for DeckST.
+`Bulldog's Food` is developed independently in the sibling
+[`bulldogs-food`](https://github.com/AnicetusCer/bulldogs-food) repository.
+This starter pack contains only its selected release floppy, cover derivative,
+DeckST profile, and redistribution metadata.
+
+Import a tested local game release with:
+
+```bash
+tools/import-bulldogs-food-release.sh ~/github/bulldogs-food
+```
 
 Keep hashes in sync using:
 

@@ -2,6 +2,12 @@
   "schema_version": 2,
   "id": "bulldog",
   "title": "Bulldog's Food",
+  "game_id": "bulldogs-food",
+  "release": {
+    "id": "original",
+    "title": "Original Edition",
+    "recommended": false
+  },
   "metadata": {
     "description": "Sneak a hungry fox across the street while Bulldog's back is turned, dodge the neighbourhood hazards, and steal his food before time runs out.",
     "release_year": 2026,

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-07-12",
+  "generated_utc": "2026-07-13",
   "items": [
     {
       "id": "BulldogsFood",
@@ -22,8 +22,8 @@
     {
       "id": "bulldog.game",
       "path": "assets/profiles/bulldog.game.json",
-      "sha256": "467393808d0cfb6bcce9a56033b9afc96fccc7f367ef5fe4e2f44dcb7d4a1ecd",
-      "bytes": 2112
+      "sha256": "d3a99360dee71f30f42085ab7d7937d6d014d305603e4caa7fad317a5f64f538",
+      "bytes": 2242
     },
     {
       "id": "EmuTOS",
